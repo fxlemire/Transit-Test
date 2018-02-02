@@ -15,7 +15,7 @@ const Map = compose(
   const markers = stops.map((stop, index) => (<Marker key={index} position={{ lat: stop.lat, lng: stop.lon }} />));
   const defaultCenter = stops[0]
     ? { lat: stops[0].lat, lng: stops[0].lon }
-    : { lat: 45.5015567, lng: -73.6753791 };
+    : { lat: 40.8050757, lng: -73.8949258 };
 
   return (
     <GoogleMap
