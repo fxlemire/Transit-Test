@@ -1,0 +1,30 @@
+{
+  "name": "transit-test-client",
+  "version": "1.0.0",
+  "description": "Test for Transit Application - Client",
+  "main": "src/app.js",
+  "private": false,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fxlemire/Transit-Test.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fxlemire/Transit-Test/issues"
+  },
+  "homepage": "https://github.com/fxlemire/Transit-Test#README",
+  "author": "François-Xavier Lemire <fxlemire@webjomp.com>",
+  "dependencies": {
+    "jsonstream2": "^1.1.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-google-maps": "^9.4.5",
+    "react-scripts": "1.1.0",
+    "recompose": "^0.26.0"
+  }
+}
