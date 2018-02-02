@@ -1,18 +1,15 @@
+import { PassThrough } from 'stream';
+
 import getNycStops from './nyc/stops';
-import { City, Stop } from './types';
+import { City } from './types';
 
-const getStops = async (city: City): Promise<Stop[]> => {
-  let stops: Stop[];
-
+const getStops = (city: City): PassThrough => {
   switch (city) {
     case 'NYC':
-      stops = await getNycStops();
-      break;
+      return getNycStops();
     default:
       throw { status: 400, message: 'Bad request: invalid city parameter.' };
   }
-
-  return stops;
 };
 
 export default getStops;
