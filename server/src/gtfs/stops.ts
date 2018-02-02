@@ -1,8 +1,8 @@
-import { City } from './cities';
 import getNycStops from './nyc/stops';
+import { City, Stop } from './types';
 
-const getStops = async (city: City) => {
-  let stops;
+const getStops = async (city: City): Promise<Stop[]> => {
+  let stops: Stop[];
 
   switch (city) {
     case 'NYC':
