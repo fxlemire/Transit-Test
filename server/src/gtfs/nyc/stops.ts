@@ -1,16 +1,23 @@
 import { createReadStream } from 'fs';
 import { resolve as resolvePath } from 'path';
 import { createInterface } from 'readline';
+import { PassThrough } from 'stream';
 import { Stop } from '../types';
 
-const getStopsData = (): Promise<Stop[]> => new Promise((resolve, reject) => {
-  const stops: Stop[] = [];
+const getStopsData = (): PassThrough => {
+  let isFirstLine = true;
+  const stopsStream = new PassThrough();
   const rl = createInterface({
     crlfDelay: global.Infinity,
     input: createReadStream(resolvePath(__dirname, '../../../data/nyc/stops.txt')),
   } as any);
 
   rl.on('line', (line: string) => {
+    if (isFirstLine) {
+      isFirstLine = false;
+      return;
+    }
+
     const [id, code, name, desc, lat, lon, zoneId, url, locationType, parentStation] = line.split(',');
     const stop: Stop = {
       id,
@@ -25,13 +32,14 @@ const getStopsData = (): Promise<Stop[]> => new Promise((resolve, reject) => {
       lon: Number.parseFloat(lon),
     };
 
-    stops.push(stop);
+    stopsStream.push(JSON.stringify(stop));
   });
 
-  rl.on('error', e => reject(e));
-  rl.on('close', () => resolve(stops));
-});
+  rl.on('close', () => stopsStream.push(null)); // tslint:disable-line no-null-keyword
 
-const getNycStops = async () => getStopsData();
+  return stopsStream;
+};
+
+const getNycStops = () => getStopsData();
 
 export default getNycStops;
