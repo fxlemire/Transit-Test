@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/fxlemire/Transit-Test#README",
   "author": "François-Xavier Lemire <fxlemire@webjomp.com>",
+  "license": "MIT",
   "dependencies": {
     "jsonstream2": "^1.1.1",
     "react": "^16.2.0",
