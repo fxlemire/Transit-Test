@@ -1,10 +1,7 @@
 import { json, urlencoded } from 'body-parser';
 import * as compress from 'compression';
 import * as express from 'express';
-import { createReadStream } from 'fs';
 import * as logger from 'morgan';
-import { resolve } from 'path';
-import { createInterface } from 'readline';
 import getStops from './gtfs/stops';
 
 const app = express();
@@ -22,7 +19,7 @@ app.get('/stops', async (req, res) => {
 
     res.status(200).send(stops);
   } catch (error) {
-    res.status(error.status).send(error.message);
+    res.status(error.status || 500).send(error.status ? error.message : 'An unexpected error occurred.');
   }
 });
 
